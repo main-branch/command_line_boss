@@ -2,7 +2,7 @@
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+  config.example_status_persistence_file_path = '.rspec_status'
 
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
@@ -14,9 +14,9 @@ end
 
 # Setup simplecov
 
-require "simplecov"
-require "simplecov-lcov"
-require "json"
+require 'simplecov'
+require 'simplecov-lcov'
+require 'json'
 
 SimpleCov.formatters = [SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatter::LcovFormatter]
 
@@ -29,7 +29,7 @@ SimpleCov.formatters = [SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatte
 # @return [Boolean]
 #
 def env_true?(name)
-  value = ENV.fetch(name, "").downcase
+  value = ENV.fetch(name, '').downcase
   %w[yes on true 1].include?(value)
 end
 
@@ -50,7 +50,7 @@ end
 # @return [Boolean]
 #
 def fail_on_low_coverage?
-  !(RSpec.configuration.dry_run? || env_true?("COV_NO_FAIL"))
+  !(RSpec.configuration.dry_run? || env_true?('COV_NO_FAIL'))
 end
 
 # Return `true` if the the test run should show the lines not covered by tests
@@ -58,7 +58,7 @@ end
 # @return [Boolean]
 #
 def show_lines_not_covered?
-  env_true?("COV_SHOW_UNCOVERED")
+  env_true?('COV_SHOW_UNCOVERED')
 end
 
 # Report if the test coverage was below the configured threshold
@@ -99,7 +99,7 @@ SimpleCov.at_exit do
   # rubocop:disable Style/StderrPuts
   if SimpleCov.result.covered_percent < test_coverage_threshold
     $stderr.puts
-    $stderr.print "FAIL: " if fail_on_low_coverage?
+    $stderr.print 'FAIL: ' if fail_on_low_coverage?
     $stderr.puts "RSpec Test coverage fell below #{test_coverage_threshold}%"
 
     if show_lines_not_covered?
@@ -122,4 +122,4 @@ SimpleCov.start
 
 # Make sure to require your project AFTER SimpleCov.start
 #
-require "command_line_boss"
+require 'command_line_boss'
