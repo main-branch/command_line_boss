@@ -16,3 +16,5 @@
 /.rspec_status
 
 /rubocop-report.json
+
+/.yarddoc

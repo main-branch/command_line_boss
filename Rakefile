@@ -43,3 +43,37 @@ RuboCop::RakeTask.new do |t|
 end
 
 CLEAN << 'rubocop-report.json'
+
+unless RUBY_PLATFORM == 'java'
+  # yard:build
+
+  require 'yard'
+
+  YARD::Rake::YardocTask.new('yard:build') do |t|
+    t.files = %w[lib/**/*.rb examples/**/*]
+    t.stats_options = ['--list-undoc']
+  end
+
+  CLEAN << '.yardoc'
+  CLEAN << 'doc'
+
+  # yard:audit
+
+  desc 'Run yardstick to show missing YARD doc elements'
+  task :'yard:audit' do
+    sh "yardstick 'lib/**/*.rb'"
+  end
+
+  # yard:coverage
+
+  require 'yardstick/rake/verify'
+
+  Yardstick::Rake::Verify.new(:'yard:coverage') do |verify|
+    verify.threshold = 100
+  end
+
+  # yard
+
+  desc 'Run all YARD tasks'
+  task yard: %i[yard:build yard:audit yard:coverage]
+end
