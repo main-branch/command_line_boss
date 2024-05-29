@@ -8,8 +8,12 @@ Gem::Specification.new do |spec|
   spec.authors = ["James Couball"]
   spec.email = ["jcouball@yahoo.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "Command Line Boss is a convenience layer over OptionsParser"
+  spec.description = <<~DESCRIPTION
+    Command Line Boss is a convenience layer over OptionsParser. It provides a simple
+    way to define command line options and arguments, and then parse them into an options
+    object.
+  DESCRIPTION
   spec.homepage = "TODO: Put your gem's website or public repo URL here."
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
