@@ -1,8 +1,34 @@
 AllCops:
-  TargetRubyVersion: 3.0
+  NewCops: enable
+  SuggestExtensions: false
+  DefaultFormatter: fuubar
 
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
+  # Output extra information for each offense to make it easier to diagnose:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: true
 
-Style/StringLiteralsInInterpolation:
-  EnforcedStyle: double_quotes
+  # RuboCop enforces rules depending on the oldest version of Ruby which
+  # your project supports:
+  TargetRubyVersion: 3.1
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+# The DSL for RSpec and the gemspec file make it very hard to limit block length
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
+    - '*.gemspec'
+
+Metrics/ModuleLength:
+  CountAsOne: ['hash']
+
+Metrics/ClassLength:
+  CountAsOne: ['hash']
+
+Style/AsciiComments:
+  Enabled: false

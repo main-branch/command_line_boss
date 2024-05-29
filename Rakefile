@@ -30,3 +30,16 @@ RSpec::Core::RakeTask.new
 CLEAN << 'coverage'
 CLEAN << '.rspec_status'
 CLEAN << 'rspec-report.xml'
+
+# Rubocop
+
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new do |t|
+  t.options = %w[
+    --format progress
+    --format json --out rubocop-report.json
+  ]
+end
+
+CLEAN << 'rubocop-report.json'
