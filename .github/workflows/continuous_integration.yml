@@ -66,6 +66,6 @@ jobs:
       - name: Report test coverage
         uses: paambaati/codeclimate-action@v6.0.0
         env:
-          CC_TEST_REPORTER_ID: 103c3881b137d757cdf9d9201d89d72184fe2676b2eed08bbe930358b08581de
+          CC_TEST_REPORTER_ID: 59b5645f30f1d2737a5811628e315c026c5ea2aeced2d77dae4b7b394a85e966
         with:
           coverageLocations: ${{github.workspace}}/coverage/lcov/*.lcov:lcov
