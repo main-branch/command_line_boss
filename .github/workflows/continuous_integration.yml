@@ -1,0 +1,71 @@
+name: CI Build
+
+on:
+  push:
+    branches: [main]
+
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Ruby ${{ matrix.ruby }} on ${{ matrix.operating-system }}
+    runs-on: ${{ matrix.operating-system }}
+    continue-on-error: ${{ matrix.experimental == 'Yes' }}
+
+    strategy:
+      matrix:
+        ruby: ["3.1", "3.2", "3.3", head, jruby-head]
+        operating-system: [ubuntu-latest]
+        experimental: [No]
+        include:
+          - ruby: "3.0"
+            operating-system: windows-latest
+          - ruby: head
+            operating-system: ubuntu-latest
+            # If the 'ruby: head' build fails, it is ok to set 'experimental: Yes'
+            # in order to make the workflow continue. Open a GitHub issue about
+            # the failure. Comment out the 'experimental: Yes' line once the
+            # issue is resolved.
+            # experimental: Yes
+          - ruby: jruby-head
+            operating-system: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Run rake
+        run: bundle exec rake
+
+  coverage:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    name: Report test coverage to CodeClimate
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+
+      - name: Run tests
+        run: bundle exec rake spec
+
+      - name: Report test coverage
+        uses: paambaati/codeclimate-action@v6.0.0
+        env:
+          CC_TEST_REPORTER_ID: 103c3881b137d757cdf9d9201d89d72184fe2676b2eed08bbe930358b08581de
+        with:
+          coverageLocations: ${{github.workspace}}/coverage/lcov/*.lcov:lcov
