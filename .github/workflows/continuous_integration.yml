@@ -19,7 +19,7 @@ jobs:
         operating-system: [ubuntu-latest]
         experimental: [No]
         include:
-          - ruby: "3.0"
+          - ruby: "3.1"
             operating-system: windows-latest
           - ruby: head
             operating-system: ubuntu-latest
