@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+desc 'Run the same tasks that the CI build will run'
+if RUBY_PLATFORM == 'java'
+  task default: %w[spec rubocop bundle:audit build]
+else
+  task default: %w[spec rubocop yard bundle:audit build]
+end
+
 # Bundler Audit
 
 require 'bundler/audit/task'
