@@ -1,0 +1,125 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'command_line_boss'
+require 'csv'
+require 'pp'
+
+# This is a simple example of how to use the CommandLineBoss gem
+
+# Sheets specified at the command line
+#
+# @!attribute title [String, nil] the title of the sheet to create or nil for the default title
+# @!attribute data [Array<Array<Object>>, nil] the data to write to the sheet or nil
+#
+# @api public
+Sheet = Struct.new(:title, :data)
+
+# Permissions specified at the command line
+#
+# @!attribute permission_spec [String] the permission spec as given at the command line
+# @!attribute type [String] must be one of VALID_PERM_TYPES
+# @!attribute subject [String, nil] the name of the subject the permission is given to
+#
+#   * If the type is 'user' or 'group', must be a valid email address
+#   * If type is 'domain', must be a valid domain name
+#   * If type is anyone, must be nil
+#
+# @!attribute role [String] myst be one of VALID_PERM_ROLES
+Permission = Struct.new(:permission_spec, :type, :subject, :role)
+
+VALID_PERM_TYPES = %w[user group domain anyone].freeze
+VALID_PERM_ROLES = %w[organizer fileOrganizer writer commenter reader].freeze
+
+# A command line parser for creating spreadsheets
+#
+# @!attribute [r] spreadsheet_title
+#   @return [String, nil] The title of the spreadsheet to create or nil for the default title
+#
+# @!attribute [r] sheets
+#   @return [Array<Sheet>] The sheets to create in the spreadsheet
+#
+# @!attribute [r] folder_id
+#   @return [String, nil] The ID of the folder to move the spreadsheet to
+#
+# @!attribute [r] permissions
+#   @return [Array<Permission>] The list of permissions to add to the spreadsheet
+#
+# @example Create a spreadsheet named "My Spreadsheet" with a default sheet named "Sheet1"
+#   ARGV #=> ["My Spreadsheet"]
+#   options = CommandLineParser.new.call(ARGV)
+#   options.spreadsheet_title #=> "My Spreadsheet"
+#
+# @api pubic
+#
+class CreateSpreadsheetCli < CommandLineBoss
+  attr_reader :title, :sheets, :folder_id, :permissions
+
+  private
+
+  def set_defaults
+    @title = nil
+    @sheets = []
+    @permissions = []
+    @folder_id = nil
+  end
+
+  def define_sheet_title_option
+    parser.on('--sheet-title=TITLE', 'Title of a sheet to create') do |title|
+      sheets << Sheet.new(title:, data: nil)
+    end
+  end
+
+  def define_sheet_data_option
+    parser.on('--sheet-data=DATA_FILE', 'Data file for the last sheet') do |data_file|
+      sheets << Sheet.new(title: nil, data: nil) if sheets.empty?
+      if sheets.last.data
+        error_messages << 'Only one --sheet-data option is allowed per --sheet-title'
+      else
+        sheets.last.data = CSV.read(data_file)
+      end
+    end
+  end
+
+  def define_folder_option
+    parser.on('--folder=FOLDER_ID', 'Create the spreadsheet to the given Google Drive folder') do |folder_id|
+      if @folder_id
+        error_messages << 'Only one --folder option is allowed'
+      else
+        @folder_id = folder_id
+      end
+    end
+  end
+
+  PERMISSION_SPEC_REGEXP = /
+    ^
+    (?<type>[^:]+)
+    (?:
+      :(?<subject>[^:]+)
+    )?
+    :(?<role>[^:]+)
+    $
+  /x
+
+  def define_permission_option
+    parser.on('--permission=PERMISSION_SPEC', 'Set permissions on the spreadsheet') do |permission_spec|
+      match = permission_spec.match(PERMISSION_SPEC_REGEXP)
+      unless match
+        error_messages << "Invalid permission spec: #{permission_spec}"
+        next
+      end
+      permissions << Permission.new(
+        permission_spec:, type: match[:type], subject: match[:subject], role: match[:role]
+      )
+    end
+  end
+end
+
+options = CreateSpreadsheetCli.new.call(ARGV)
+
+puts <<~OPTIONS
+  Creating spreadsheet with title: #{options.title.pretty_inspect}
+  Creating sheets: #{options.sheets.pretty_inspect}
+  In folder: #{options.folder_id.pretty_inspect}
+  Adding permissions: #{options.permissions.pretty_inspect}
+OPTIONS
