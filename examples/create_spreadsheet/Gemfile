@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+gem 'command_line_boss', path: File.expand_path(`git rev-parse --show-toplevel`.chomp)
+
+gem 'create_spreadsheet', path: '.'
+
+gem 'csv', '~> 3.3'
+gem 'fuubar', '~> 2.5'
+gem 'rake', '~> 13.0'
+gem 'rspec', '~> 3.0'
+gem 'rubocop', '~> 1.64'
+gem 'simplecov', '~> 0.22'
+gem 'simplecov-lcov', '~> 0.8'
+gem 'turnip', '~> 4.4'

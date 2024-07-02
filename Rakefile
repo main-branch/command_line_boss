@@ -32,7 +32,9 @@ CLOBBER << 'Gemfile.lock'
 
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = 'spec/**/*{_spec.rb,.feature}'
+end
 
 CLEAN << 'coverage'
 CLEAN << '.rspec_status'
@@ -44,8 +46,10 @@ require 'rubocop/rake_task'
 
 RuboCop::RakeTask.new do |t|
   t.options = %w[
-    --format progress
+    --format fuubar
     --format json --out rubocop-report.json
+    --display-cop-names
+    --config .rubocop.yml
   ]
 end
 

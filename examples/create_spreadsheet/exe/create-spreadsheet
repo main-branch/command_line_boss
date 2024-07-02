@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'create_spreadsheet'
+require 'csv'
+require 'pp'
+
+options = CreateSpreadsheet::CommandLine.new.parse(ARGV)
+
+if options.failed?
+  warn "Parsing failed:\n#{options.error_messages.join("\n")}"
+  exit 1
+end
+
+# options =
+#   begin
+#     CreateSpreadsheet::CommandLine.new.parse(ARGV)
+#   rescue CommandLineBoss::Error => e
+#     warn "ERROR: #{e.parser.error_messages.join("\nERROR: ")}"
+#     exit 1
+#   end
+
+puts <<~OPTIONS
+  Creating spreadsheet with title: #{options.title.pretty_inspect}
+  Creating sheets: #{options.sheets.pretty_inspect}
+  In folder: #{options.folder_id.pretty_inspect}
+  Adding permissions: #{options.permissions.pretty_inspect}
+OPTIONS

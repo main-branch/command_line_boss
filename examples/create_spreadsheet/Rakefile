@@ -1,0 +1,50 @@
+# frozen_string_literal: true
+
+task default: %i[spec rubocop build]
+
+require 'rake/clean'
+
+# RSpec
+
+require 'rake'
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = './spec/**/*{_spec.rb,.feature}'
+end
+
+CLEAN << 'coverage'
+CLEAN << 'test'
+CLEAN << '.rspec_status'
+CLEAN << 'rspec-report.xml'
+
+# Bundler Gem Build
+
+require 'bundler'
+require 'bundler/gem_tasks'
+
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  warn e.message
+  warn 'Run `bundle install` to install missing gems'
+  exit e.status_code
+end
+
+CLEAN << 'pkg'
+CLOBBER << 'Gemfile.lock'
+
+# Rubocop
+
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new do |t|
+  t.options = %w[
+    --format fuubar
+    --format json --out rubocop-report.json
+    --display-cop-names
+    --config .rubocop.yml
+  ]
+end
+
+CLEAN << 'rubocop-report.json'

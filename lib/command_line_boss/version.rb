@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
-module CommandLineBoss
+class CommandLineBoss
+  # Gem version
   VERSION = '0.1.0'
 end
