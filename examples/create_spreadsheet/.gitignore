@@ -1,4 +1,4 @@
-/.bundle/
+Gemfile.lock/.bundle/
 /.yardoc
 /_yardoc/
 /coverage/

@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'command_line_boss'
+
+# Define a command line interface for creating a spreadsheet
+class CreateSpreadsheetCli < CommandLineBoss
+  attr_reader :spreadsheet_name, :sheet_names
+
+  private
+
+  def set_defaults
+    @spreadsheet_name = nil
+    @sheet_names = []
+  end
+
+  def define_sheet_option
+    parser.on('--sheet=SHEET_NAME', 'Name of a sheet to create') do |name|
+      add_error_message('Sheet names must be unique!') if sheet_names.include?(name)
+      sheet_names << name
+    end
+  end
+
+  def validate_spreadsheet_name_given
+    add_error_message('A spreadsheet name is required') if spreadsheet_name.nil?
+  end
+
+  def validate_at_least_one_sheet_name_given
+    add_error_message('At least one sheet name is required') if sheet_names.empty?
+  end
+
+  def parse_arguments
+    @spreadsheet_name = args.shift
+  end
+
+  include CommandLineBoss::HelpOption
+
+  def banner = <<~BANNER
+    Create a spreadsheetasdf
+
+    Usage:
+      create_spreadsheet SPREADSHEET_NAME --sheet=SHEET_NAME [--sheet=SHEET_NAME ...]
+
+  BANNER
+end
+
+# Parse the command line arguments
+
+options = CreateSpreadsheetCli.new.parse(ARGV)
+
+# Report errors
+
+if options.failed?
+  warn options.error_messages.join("\n")
+  exit 1
+end
+
+# Do something with the result
+
+require 'pp'
+
+puts \
+  "Creating spreadsheet #{options.spreadsheet_name.pretty_inspect.chomp} " \
+  "with sheets #{options.sheet_names.map(&:pretty_inspect).map(&:chomp).join(', ')}"

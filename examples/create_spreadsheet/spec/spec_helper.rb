@@ -123,8 +123,8 @@ SimpleCov.at_exit do
   # rubocop:enable Style/StderrPuts
 end
 
-SimpleCov.start
+SimpleCov.start do
+  enable_coverage :branch
+end
 
-# Make sure to require your project AFTER SimpleCov.start
-#
-require 'command_line_boss'
+require 'create_spreadsheet'

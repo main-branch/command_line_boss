@@ -44,12 +44,14 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler-audit', '~> 0.9'
   spec.add_development_dependency 'create_github_release', '~> 1.4'
+  spec.add_development_dependency 'csv', '~> 3.3'
   spec.add_development_dependency 'fuubar', '~> 2.5'
   spec.add_development_dependency 'rake', '~> 13.2'
   spec.add_development_dependency 'rspec', '~> 3.13'
   spec.add_development_dependency 'rubocop', '~> 1.64'
   spec.add_development_dependency 'simplecov', '~> 0.22'
   spec.add_development_dependency 'simplecov-lcov', '~> 0.8'
+  spec.add_development_dependency 'turnip', '~> 4.4'
 
   unless RUBY_PLATFORM == 'java'
     spec.add_development_dependency 'redcarpet', '~> 3.6'
