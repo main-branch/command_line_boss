@@ -37,7 +37,7 @@ step 'an instance of the :class_name class is created' do |class_name, program_n
     @methods_called << tp.method_id
   end
   trace.enable do
-    @instance = klass.new(program_name:)
+    @instance = klass.new(program_name: program_name) # rubocop:disable Style/HashSyntax
   end
 end
 

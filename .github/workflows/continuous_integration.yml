@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby: ["3.1", "3.2", "3.3", head, jruby-head]
+        ruby: ["3.1", "3.2", "3.3", head]
         operating-system: [ubuntu-latest]
         experimental: [No]
         include:
@@ -23,13 +23,6 @@ jobs:
             operating-system: windows-latest
           - ruby: head
             operating-system: ubuntu-latest
-            # If the 'ruby: head' build fails, it is ok to set 'experimental: Yes'
-            # in order to make the workflow continue. Open a GitHub issue about
-            # the failure. Comment out the 'experimental: Yes' line once the
-            # issue is resolved.
-            # experimental: Yes
-          # - ruby: jruby-head
-          #   operating-system: windows-latest
 
     steps:
       - name: Checkout
