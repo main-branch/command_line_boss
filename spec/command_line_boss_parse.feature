@@ -5,11 +5,15 @@ Feature: Parsing the command line
       """
       attr_reader :users, :verbose
 
+      # For testing
+      attr_reader :set_defaults_called, :define_user_option_called, :define_verbose_option_called
+
       private
 
       def set_defaults
         @users = []
         @verbose = false
+        @set_defaults_called = true
       end
 
       def define_user_option
@@ -21,12 +25,14 @@ Feature: Parsing the command line
 
           @users << user
         end
+        @define_user_option_called = true
       end
 
       def define_verbose_option
         @parser.on("-v", "--[no-]verbose", "Run verbosely") do |verbose|
           @verbose = verbose
         end
+        @define_verbose_option_called = true
       end
       """
     And an instance of the "CommandLine" class is created

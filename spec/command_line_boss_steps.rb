@@ -28,17 +28,7 @@ end
 
 step 'an instance of the :class_name class is created' do |class_name, program_name = nil|
   klass = @klasses[class_name]
-  trace = TracePoint.new(:call) do |tp|
-    next unless tp.self.is_a?(klass)
-
-    next if tp.method_id == :definition_method?
-
-    @methods_called ||= []
-    @methods_called << tp.method_id
-  end
-  trace.enable do
-    @instance = klass.new(program_name: program_name) # rubocop:disable Style/HashSyntax
-  end
+  @instance = klass.new(program_name:)
 end
 
 step 'an instance of :class_name is created specifying the program name :program_name' do |class_name, program_name|
@@ -50,7 +40,8 @@ step 'the :attribute_name attribute should be an empty array' do |attribute_name
 end
 
 step 'the :method_name method should have been called' do |method_name|
-  expect(@methods_called).to include(method_name.to_sym)
+  test_method = :"#{method_name}_called"
+  expect(@instance.send(test_method)).to eq(true)
 end
 
 step 'the :class_name class defines the instance attribute :attribute_name' do |class_name, attribute_name|
