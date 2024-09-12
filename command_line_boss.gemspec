@@ -38,17 +38,21 @@ Gem::Specification.new do |spec|
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+  spec.requirements = [
+    'Platform: Mac, Linux, or Windows',
+    'Ruby: MRI 3.1 or later, TruffleRuby 24 or later, or JRuby 9.4 or later'
+  ]
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
 
   spec.add_development_dependency 'bundler-audit', '~> 0.9'
-  spec.add_development_dependency 'create_github_release', '~> 1.4'
+  spec.add_development_dependency 'create_github_release', '~> 1.5'
   spec.add_development_dependency 'csv', '~> 3.3'
   spec.add_development_dependency 'fuubar', '~> 2.5'
   spec.add_development_dependency 'rake', '~> 13.2'
   spec.add_development_dependency 'rspec', '~> 3.13'
-  spec.add_development_dependency 'rubocop', '~> 1.64'
+  spec.add_development_dependency 'rubocop', '~> 1.66'
   spec.add_development_dependency 'simplecov', '~> 0.22'
   spec.add_development_dependency 'simplecov-lcov', '~> 0.8'
   spec.add_development_dependency 'turnip', '~> 4.4'

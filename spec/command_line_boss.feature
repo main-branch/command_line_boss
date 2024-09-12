@@ -8,7 +8,11 @@ Feature: Defining a command line parser
       """
       private
 
-      def set_defaults; end
+      attr_reader :set_defaults_called
+
+      def set_defaults
+        @set_defaults_called = true
+      end
       """
     When an instance of the "CommandLine" class is created
     Then the "set_defaults" method should have been called
@@ -18,11 +22,15 @@ Feature: Defining a command line parser
       """
       attr_reader :users, :verbose
 
+      # For testing
+      attr_reader :set_defaults_called
+
       private
 
       def set_defaults
         @users = []
         @verbose = false
+        @set_defaults_called = true
       end
       """
     When an instance of the "CommandLine" class is created
@@ -36,13 +44,21 @@ Feature: Defining a command line parser
 
       private
 
+      # For testing
+      attr_reader :define_user_option_called, :define_verbose_option_called
+
       def set_defaults
         @users = []
         @verbose = false
       end
 
-      def define_user_option; end
-      def define_verbose_option; end
+      def define_user_option
+        @define_user_option_called = true
+      end
+
+      def define_verbose_option
+        @define_verbose_option_called = true
+      end
       """
     When an instance of the "CommandLine" class is created
     Then the "define_user_option" method should have been called
