@@ -32,7 +32,6 @@ jobs:
             operating-system: windows-latest
 
     env:
-      JAVA_OPTS: -Djdk.io.File.enableADS=true
       JRUBY_OPTS: --debug
 
     steps:
