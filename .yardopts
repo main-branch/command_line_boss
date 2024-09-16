@@ -1,1 +1,7 @@
+--no-private
+--hide-void-return
+--markup-provider=redcarpet
+--markup markdown
 --exclude examples/**
+- CHANGELOG.md
+- LICENSE.txt
