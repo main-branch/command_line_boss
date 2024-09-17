@@ -6,6 +6,7 @@
 [![Build Status](https://github.com/main-branch/command_line_boss/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/main-branch/command_line_boss/actions/workflows/continuous_integration.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/513b4d8d95a5e3a77ec6/maintainability)](https://codeclimate.com/github/main-branch/command_line_boss/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/513b4d8d95a5e3a77ec6/test_coverage)](https://codeclimate.com/github/main-branch/command_line_boss/test_coverage)
+[![Slack](https://img.shields.io/badge/slack-main--branch/command__line__boss-yellow.svg?logo=slack)](https://main-branch.slack.com/archives/C07MQC0LNKF)
 
 CommandLineBoss is built on top of `OptionParser` to make more complex uses of OptionParser easier to manage and test.
 
