@@ -46,10 +46,12 @@ Gem::Specification.new do |spec|
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
 
+  spec.add_dependency 'logger', '~> 1.6'
   spec.add_development_dependency 'bundler-audit', '~> 0.9'
   spec.add_development_dependency 'create_github_release', '~> 1.5'
   spec.add_development_dependency 'csv', '~> 3.3'
   spec.add_development_dependency 'fuubar', '~> 2.5'
+  spec.add_development_dependency 'main_branch_shared_rubocop_config', '~> 0.1'
   spec.add_development_dependency 'rake', '~> 13.2'
   spec.add_development_dependency 'rspec', '~> 3.13'
   spec.add_development_dependency 'rubocop', '~> 1.66'
