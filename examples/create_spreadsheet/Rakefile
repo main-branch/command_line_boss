@@ -38,13 +38,4 @@ CLOBBER << 'Gemfile.lock'
 
 require 'rubocop/rake_task'
 
-RuboCop::RakeTask.new do |t|
-  t.options = %w[
-    --format fuubar
-    --format json --out rubocop-report.json
-    --display-cop-names
-    --config .rubocop.yml
-  ]
-end
-
-CLEAN << 'rubocop-report.json'
+RuboCop::RakeTask.new

@@ -22,7 +22,7 @@ end
 
 step ':class_name defines the private instance method :method_name with the body:' do |class_name, method_name, body|
   klass = @klasses[class_name]
-  klass.define_method(method_name) { eval body } # rubocop:disable Lint/Eval
+  klass.define_method(method_name) { eval body } # rubocop:disable Security/Eval
   klass.send(:private, method_name)
 end
 
