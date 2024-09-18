@@ -1,4 +1,4 @@
-# CommandLineBoss
+# The `command_line_boss` gem
 
 [![Gem Version](https://badge.fury.io/rb/command_line_boss.svg)](https://badge.fury.io/rb/command_line_boss)
 [![Documentation](https://img.shields.io/badge/Documentation-Latest-green)](https://rubydoc.info/gems/command_line_boss/)
@@ -8,13 +8,17 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/513b4d8d95a5e3a77ec6/test_coverage)](https://codeclimate.com/github/main-branch/command_line_boss/test_coverage)
 [![Slack](https://img.shields.io/badge/slack-main--branch/command__line__boss-yellow.svg?logo=slack)](https://main-branch.slack.com/archives/C07MQC0LNKF)
 
-CommandLineBoss is built on top of `OptionParser` to make more complex uses of OptionParser easier to manage and test.
+`command_line_boss` makes it easy to build, test, and maintain complex command line
+interfaces. It is built on top of Ruby's `OptionParser` class and works best for
+traditional options-based command-line interfaces that you would build with
+`OptionParser`.
 
-You are expected to already know how to define options with `OptionParser` in order to use this gem.
+To use `command_line_boss` you are expected to already know how to define options
+with `OptionParser`.
 
-This gem should be used for traditional options-based command-line interfaces that you would build with `OptionParser`.
-
-For defining complex command-line interfaces with multiple commands and subcommands (aka a git-like interface), we recommend using a gem like thor. Other good alternatives also exist.
+For defining command-line interfaces with multiple commands and subcommands (aka a
+git-like interface), we recommend using a gem like [thor](http://whatisthor.com).
+Other good alternatives also exist.
 
 * [Installation](#installation)
 * [Usage](#usage)
@@ -23,7 +27,7 @@ For defining complex command-line interfaces with multiple commands and subcomma
   * [Start your command line parser class](#start-your-command-line-parser-class)
   * [Define options](#define-options)
   * [Define additional validations](#define-additional-validations)
-  * [Process with any remaining non-option arguments](#process-with-any-remaining-non-option-arguments)
+  * [Process any remaining non-option arguments](#process-any-remaining-non-option-arguments)
   * [Optional: define help output](#optional-define-help-output)
   * [Use the parser](#use-the-parser)
   * [Run the command line](#run-the-command-line)
@@ -34,11 +38,22 @@ For defining complex command-line interfaces with multiple commands and subcomma
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+To install this gem, add to the following line to your application's gemspec OR
+Gemfile:
 
-```shell
-bundle add command_line_boss
+gemspec:
+
+```ruby
+  spec.add_development_dependency "command_line_boss", '~> 0.1'
 ```
+
+Gemfile:
+
+```ruby
+gem "command_line_boss", "~> 0.1", groups: [:development, :test]
+```
+
+and then run `bundle install`.
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
@@ -76,10 +91,11 @@ Make sure you have the `command_line_boss` gem installed.
 
 ### Design your command line
 
-Design the command line following the
-[Google developer documentation style guide for command line syntax](https://developers.google.com/style/code-syntax).
+Design the command line following the [Google developer documentation style guide for
+command line syntax](https://developers.google.com/style/code-syntax).
 
-Here is what a simple example might look like that creates a spreadsheet with named sheets:
+Here is what a simple example might look like that creates a spreadsheet with named
+sheets:
 
 ```Text
 Usage:
@@ -166,7 +182,7 @@ class CreateSpreadsheetCli < CommandLineBoss
 end
 ```
 
-### Process with any remaining non-option arguments
+### Process any remaining non-option arguments
 
 Implement `parse_arguments` to deal the remaining non-option arguments from the
 command line. Within this method, the `args` method returns the remaining
@@ -324,18 +340,27 @@ $
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake
+spec` to run the tests. You can also run `bin/console` for an interactive prompt that
+will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/main_branch/command_line_boss. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/main_branch/command_line_boss/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at
+https://github.com/main_branch/command_line_boss. This project is intended to be a
+safe, welcoming space for collaboration, and contributors are expected to adhere to
+the [code of
+conduct](https://github.com/main_branch/command_line_boss/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT
+License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
 
-Everyone interacting in the CommandLineBoss project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/command_line_boss/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the CommandLineBoss project's codebases, issue trackers, chat
+rooms and mailing lists is expected to follow the [code of
+conduct](https://github.com/[USERNAME]/command_line_boss/blob/main/CODE_OF_CONDUCT.md).
