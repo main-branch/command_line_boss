@@ -2,6 +2,6 @@ inherit_gem:
   main_branch_shared_rubocop_config: config/rubocop.yml
 
 AllCops:
-  # RuboCop enforces rules depending on the oldest version of Ruby which
-  # your project supports:
+  # Pin this project to Ruby 3.1 in case the shared config above is upgraded to 3.2
+  # or later.
   TargetRubyVersion: 3.1
