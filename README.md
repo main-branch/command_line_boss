@@ -6,6 +6,8 @@
 [![Build Status](https://github.com/main-branch/command_line_boss/actions/workflows/continuous_integration.yml/badge.svg)](https://github.com/main-branch/command_line_boss/actions/workflows/continuous_integration.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/513b4d8d95a5e3a77ec6/maintainability)](https://codeclimate.com/github/main-branch/command_line_boss/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/513b4d8d95a5e3a77ec6/test_coverage)](https://codeclimate.com/github/main-branch/command_line_boss/test_coverage)
+[![Conventional
+Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 [![Slack](https://img.shields.io/badge/slack-main--branch/command__line__boss-yellow.svg?logo=slack)](https://main-branch.slack.com/archives/C07MQC0LNKF)
 
 `command_line_boss` makes it easy to build, test, and maintain complex command line
@@ -33,6 +35,8 @@ Other good alternatives also exist.
   * [Run the command line](#run-the-command-line)
 * [Development](#development)
 * [Contributing](#contributing)
+  * [Commit message guidelines](#commit-message-guidelines)
+  * [Pull request guidelines](#pull-request-guidelines)
 * [License](#license)
 * [Code of Conduct](#code-of-conduct)
 
@@ -353,6 +357,31 @@ https://github.com/main_branch/command_line_boss. This project is intended to be
 safe, welcoming space for collaboration, and contributors are expected to adhere to
 the [code of
 conduct](https://github.com/main_branch/command_line_boss/blob/main/CODE_OF_CONDUCT.md).
+
+### Commit message guidelines
+
+All commit messages must follow the [Conventional Commits
+standard](https://www.conventionalcommits.org/en/v1.0.0/). This helps us maintain a
+clear and structured commit history, automate versioning, and generate changelogs
+effectively.
+
+To ensure compliance, this project includes:
+
+* A git commit-msg hook that validates your commit messages before they are accepted.
+
+  To activate the hook, you must have node installed and run `npm install`.
+
+* A GitHub Actions workflow that will enforce the Conventional Commit standard as
+  part of the continuous integration pipeline.
+
+  Any commit message that does not conform to the Conventional Commits standard will
+  cause the workflow to fail and not allow the PR to be merged.
+
+### Pull request guidelines
+
+All pull requests must be merged using rebase merges. This ensures that commit
+messages from the feature branch are preserved in the release branch, keeping the
+history clean and meaningful.
 
 ## License
 
