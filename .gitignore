@@ -19,3 +19,6 @@
 /rubocop-report.json
 
 /.yarddoc
+
+node_modules
+package-lock.json
