@@ -117,6 +117,10 @@ class CommandLineBoss
   #
   def failed? = !succeeded?
 
+  VALIDATION_METHOD_REGEXP = /^validate_(.+)$/
+
+  DEFINITION_METHOD_REGEXP = /^define_(.+)_option$/
+
   private
 
   # This is how you should add an error message to the error_messages array
@@ -204,8 +208,6 @@ class CommandLineBoss
   #
   def parse_arguments; end
 
-  VALIDATION_METHOD_REGEXP = /^validate_(.+)$/
-
   # Validate the command line options and remaining arguments
   #
   # Calls all validation methods defined by this class. Validation
@@ -229,8 +231,6 @@ class CommandLineBoss
   # @api private
   #
   # def set_defaults; end
-
-  DEFINITION_METHOD_REGEXP = /^define_(.+)_option$/
 
   # Define the command line options
   #
