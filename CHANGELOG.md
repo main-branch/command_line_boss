@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3](https://github.com/main-branch/command_line_boss/compare/v0.2.2...v0.2.3) (2025-04-18)
+
+
+### Other Changes
+
+* Configure release-please to includes all changes in the CHANGELOG ([8d17cb3](https://github.com/main-branch/command_line_boss/commit/8d17cb3dbac1a66d43251d3eae463da62d82f2e3))
+
 ## [0.2.2](https://github.com/main-branch/command_line_boss/compare/v0.2.1...v0.2.2) (2025-04-17)
 
 
